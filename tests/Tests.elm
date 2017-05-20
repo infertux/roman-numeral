@@ -4,6 +4,7 @@ import Test exposing (..)
 import Expect
 import Fuzz exposing (list, int, tuple, string)
 import String
+import RomanNumeral
 
 
 all : Test
@@ -16,9 +17,8 @@ all =
             , test "String.left" <|
                 \() ->
                     Expect.equal "a" (String.left 1 "abcdefg")
-            , test "This test should fail - you should remove it" <|
-                \() ->
-                    Expect.fail "Failed as expected!"
+            , test "1" <|
+                \() -> Expect.equal (RomanNumeral.arabicToRoman 1) "I"
             ]
         , describe "Fuzz test examples, using randomly generated input"
             [ fuzz (list int) "Lists always have positive length" <|
