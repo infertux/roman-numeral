@@ -1,6 +1,17 @@
 module RomanNumeral exposing (arabicToRoman)
 
+{-| Convert an Arabic numeral to a Roman one.
 
+@docs arabicToRoman
+
+-}
+
+
+{-|
+
+    arabicToRoman 123 == Just "CXXIII"
+    arabicToRoman 0 == Nothing
+-}
 arabicToRoman : Int -> Maybe String
 arabicToRoman arabic =
     let
