@@ -1,14 +1,14 @@
-module Tests exposing (..)
+module Tests exposing (suite)
 
-import Test exposing (..)
 import Expect
 import Fuzz
-import String
 import RomanNumeral
+import String
+import Test exposing (..)
 
 
-all : Test
-all =
+suite : Test
+suite =
     describe "RomanNumeral.arabicToRoman"
         [ describe "test valid numbers"
             [ test "1" <| \() -> assert 1 "I"
@@ -69,7 +69,7 @@ all =
             [ test "0" <|
                 \() ->
                     Expect.equal Nothing <| RomanNumeral.arabicToRoman 0
-            , test "0" <|
+            , test "4000" <|
                 \() ->
                     Expect.equal Nothing <| RomanNumeral.arabicToRoman 4000
             ]

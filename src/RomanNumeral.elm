@@ -10,26 +10,29 @@ module RomanNumeral exposing (arabicToRoman)
 {-|
 
     arabicToRoman 123 == Just "CXXIII"
+
     arabicToRoman 0 == Nothing
+
 -}
 arabicToRoman : Int -> Maybe String
 arabicToRoman arabic =
     let
         digits =
-            toString arabic
+            String.fromInt arabic
                 |> String.toList
                 |> List.reverse
                 |> List.map String.fromChar
-                |> List.map (\char -> String.toInt char |> Result.withDefault 0)
+                |> List.map (\char -> String.toInt char |> Maybe.withDefault 0)
 
         parts =
             List.reverse <|
                 List.indexedMap (\exp -> \digit -> digit * 10 ^ exp) digits
     in
-        if arabic > 0 && arabic < 4000 then
-            Just <| String.concat <| List.map reduce parts
-        else
-            Nothing
+    if arabic > 0 && arabic < 4000 then
+        Just <| String.concat <| List.map reduce parts
+
+    else
+        Nothing
 
 
 reduce : Int -> String
@@ -53,42 +56,42 @@ reduce arabic =
         msd =
             arabic // magnitude
     in
-        case msd of
-            0 ->
-                ""
+    case msd of
+        0 ->
+            ""
 
-            1 ->
-                char1
+        1 ->
+            char1
 
-            2 ->
-                char1 ++ char1
+        2 ->
+            char1 ++ char1
 
-            3 ->
-                char1 ++ char1 ++ char1
+        3 ->
+            char1 ++ char1 ++ char1
 
-            4 ->
-                char1 ++ char5
+        4 ->
+            char1 ++ char5
 
-            5 ->
-                char5
+        5 ->
+            char5
 
-            6 ->
-                char5 ++ char1
+        6 ->
+            char5 ++ char1
 
-            7 ->
-                char5 ++ char1 ++ char1
+        7 ->
+            char5 ++ char1 ++ char1
 
-            8 ->
-                char5 ++ char1 ++ char1 ++ char1
+        8 ->
+            char5 ++ char1 ++ char1 ++ char1
 
-            9 ->
-                char1 ++ char10
+        9 ->
+            char1 ++ char10
 
-            10 ->
-                char10
+        10 ->
+            char10
 
-            _ ->
-                Debug.crash <| "Unexpected msd: " ++ toString msd
+        _ ->
+            ""
 
 
 convert : Int -> String
